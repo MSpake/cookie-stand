@@ -1,16 +1,18 @@
 'use strict';
 
-//Business Hours
-// var business_hours = [6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
+
+var business_hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 function Cookie_store(location, min_customers, max_customers, avg_cookies_per_sale) {
   this.location = location;
   this.min_customers = min_customers;
   this.max_customers = max_customers;
   this.avg_cookies_per_sale = avg_cookies_per_sale;
-  this.hours = [6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
+  this.hours = business_hours;
   this.cookies_per_hour = [];
   this.total_cookies_sold = 0;
+  //remove all whitespace syntax found on Stack Overflow: https://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text/6623263
+  this.id_name = this.location.toLowerCase().replace(/\s/g, '');
 }
 
 //generate random number of customers per hour
@@ -29,6 +31,31 @@ Cookie_store.prototype.calculate_sales_per_hour = function() {
   }
 };
 
+//function to render given store to the page
+Cookie_store.prototype.add_store_to_sales_list = function() {
+  ////add tds for each hour of sales
+
+  var get_parent_element = document.getElementById('sales-list-body');
+  var add_store_row = document.createElement('tr');
+  add_store_row.setAttribute('id', this.id_name);
+  add_store_row.setAttribute('class', 'store');
+
+  var store_name = document.createElement('th');
+  store_name.textContent = this.location;
+
+  add_store_row.appendChild(store_name);
+
+  for (var i = 0; i < this.hours.length; i++) {
+    var add_hourly_sales = document.createElement('td');
+    add_hourly_sales.textContent = this.cookies_per_hour[i];
+    add_store_row.appendChild(add_hourly_sales);
+  }
+
+  get_parent_element.appendChild(add_store_row);
+};
+
+//TODO: add a function to populate the header with the business hours
+
 var pike_store = new Cookie_store('Pike Place', 23, 65, 6.3);
 var seatac_store = new Cookie_store('SeaTac', 3, 24, 1.2);
 var seattle_center_store = new Cookie_store('Seattle Center', 11, 38, 3.7);
@@ -41,56 +68,14 @@ seattle_center_store.calculate_sales_per_hour();
 capitol_hill_store.calculate_sales_per_hour();
 alki_store.calculate_sales_per_hour();
 
+pike_store.add_store_to_sales_list();
+seatac_store.add_store_to_sales_list();
+seattle_center_store.add_store_to_sales_list();
+capitol_hill_store.add_store_to_sales_list();
+alki_store.add_store_to_sales_list();
+
 console.log(pike_store);
 console.log(seatac_store);
 console.log(seattle_center_store);
 console.log(capitol_hill_store);
 console.log(alki_store);
-
-
-
-// //display cookie sales per hour
-// //list hourly increments including am/pm
-// function print_hourly_sales() {
-//     //remove all whitespace syntax found on Stack Overflow: https://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text/6623263
-//     var get_parent_element = document.getElementById(this.location.toLowerCase().replace(/\s/g, ''));
-//     var cookies_per_hour_list = document.createElement('ul');
-//     get_parent_element.appendChild(cookies_per_hour_list);
-
-
-//   for (var i = 0; i < this.hours.length; i++) {
-//     var am_pm;
-//     if (i < 6) { am_pm = 'am'; } else { am_pm = 'pm'; } //this will cause problems if the hours change.
-//     var add_hourly = document.createElement('li');
-//     add_hourly.textContent = `${this.hours[i]}${am_pm}: ${this.cookies_per_hour[i]} cookies`;
-//     cookies_per_hour_list.appendChild(add_hourly);
-//   }
-// }
-
-// //function to render given store to the page
-// function add_store_to_sales_list(store) {
-//   var get_parent_element = document.getElementById('sales-list');
-//   var add_store_li = document.createElement('li');
-//   //remove all whitespace syntax found on Stack Overflow: https://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text/6623263
-//   add_store_li.setAttribute('id', store.location.toLowerCase().replace(/\s/g, ''));
-//   add_store_li.setAttribute('class', 'store');
-//   get_parent_element.appendChild(add_store_li);
-
-//   var store_header = document.createElement('h2');
-//   store_header.textContent = store.location;
-//   add_store_li.appendChild(store_header);
-// }
-
-
-// add_store_to_sales_list(pike_store);
-// add_store_to_sales_list(seatac_store);
-// add_store_to_sales_list(seattle_center_store);
-// add_store_to_sales_list(capitol_hill_store);
-// add_store_to_sales_list(alki_store);
-
-
-// pike_store.hourly_sales();
-// seatac_store.hourly_sales();
-// seattle_center_store.hourly_sales();
-// capitol_hill_store.hourly_sales();
-// alki_store.hourly_sales();
