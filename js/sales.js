@@ -85,27 +85,32 @@ function sales_per_hour() {
 //display cookie sales per hour
 //list hourly increments including am/pm
 function print_hourly_sales() {
+  //remove all whitespace syntax found on Stack Overflow: https://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text/6623263
+  var get_parent_element = document.getElementById(this.location.toLowerCase().replace(/\s/g, ''));
+  var cookies_per_hour_list = document.createElement('ul');
+  get_parent_element.append(cookies_per_hour_list);
+
+
   for (var i = 0; i < this.hours.length; i++) {
     var am_pm;
     if (i < 6) { am_pm = 'am'; } else { am_pm = 'pm'; } //this will cause problems if the hours change.
-
-    //remove all whitespace syntax found on Stack Overflow: https://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text/6623263
-    var get_parent_element = document.getElementById(this.location.toLowerCase().replace(/\s/g, ''));
     var add_hourly = document.createElement('li');
     add_hourly.textContent = `${this.hours[i]}${am_pm}: ${this.cookies_per_hour[i]} cookies`;
-    get_parent_element.append(add_hourly);
+    cookies_per_hour_list.append(add_hourly);
   }
 }
 
 //function to print given store to the page
 function add_store_to_sales_list(store) {
   var get_parent_element = document.getElementById('sales-list');
-  var add_store = document.createElement('h2');
+  var add_store_li = document.createElement('li');
   //remove all whitespace syntax found on Stack Overflow: https://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text/6623263
-  add_store.setAttribute('id', store.location.toLowerCase().replace(/\s/g, ''));
-  console.log(add_store);
-  add_store.textContent = store.location;
-  get_parent_element.append(add_store);
+  add_store_li.setAttribute('id', store.location.toLowerCase().replace(/\s/g, ''));
+  get_parent_element.append(add_store_li);
+
+  var store_header = document.createElement('h2');
+  store_header.textContent = store.location;
+  add_store_li.append(store_header);
 }
 
 
