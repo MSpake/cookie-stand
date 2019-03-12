@@ -1,7 +1,11 @@
 'use strict';
 
+//--------------------------------
+
+//Constructors and functions
+
+
 //Cookie store constructor
-//takes store location, minimun customers per day, maximum customers per day, and average number of cookies sold per customer
 function Cookie_store(location, min_customers, max_customers, avg_cookies_per_sale) {
   this.location = location;
   this.min_customers = min_customers;
@@ -14,10 +18,10 @@ function Cookie_store(location, min_customers, max_customers, avg_cookies_per_sa
   this.id_name = this.location.toLowerCase().replace(/\s/g, '');
 }
 
-//method to generate random number of customers per hour
-//calculate cookie sales for the hour
-//add cookies sold per hour to the store's cookies_per_hour array
-//update total cookies sold for the day
+//Cookie store method calculate_sales_per_hour
+//generates random number of customers per hour
+//calculates cookie sales per hour, pushes to the store's cookies_per_hour array
+//updates total cookies sold for the day
 Cookie_store.prototype.calculate_sales_per_hour = function() {
   for (var i = 0; i < this.hours.length; i++) {
     //syntax for Math.random from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -30,7 +34,8 @@ Cookie_store.prototype.calculate_sales_per_hour = function() {
   }
 };
 
-//method to render the store sales to the page
+//Cookie store method render_store_to_sales_page
+//renders the store location and hourly sales to the sales table
 Cookie_store.prototype.render_store_to_sales_list = function() {
   var get_parent_element = document.getElementById('sales-list-body');
   var store_row = document.createElement('tr');
@@ -55,7 +60,8 @@ Cookie_store.prototype.render_store_to_sales_list = function() {
 };
 
 
-//populate the header of the table with the business hours
+//header function
+//populates the header of the sales table with the business hours
 function header() {
   var table_head = document.getElementById('sales-list-head');
   var place_holder = document.createElement('th');
@@ -68,7 +74,8 @@ function header() {
   }
 }
 
-//populate the footer of the table with the daily totals
+//footer function
+//populates the footer of the sales table with the daily totals
 function footer() {
   var table_foot = document.getElementById('sales-list-foot');
   var totals_row = document.createElement('th');
@@ -95,10 +102,12 @@ function footer() {
 
 //--------------------------------
 
+//Runtime
+
 //hours the cookie stores are open
 var business_hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
-//list of stores
+//array of stores
 var stores = [
   new Cookie_store('Pike Place', 23, 65, 6.3),
   new Cookie_store('SeaTac', 3, 24, 1.2),
@@ -113,8 +122,6 @@ for (var i = 0; i < stores.length; i++) {
   stores[i].calculate_sales_per_hour();
   stores[i].render_store_to_sales_list();
 }
-
-console.log(stores);
 
 //render header (business hours)
 //render footer (hourly sales)
