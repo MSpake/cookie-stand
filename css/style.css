@@ -1,11 +1,16 @@
+/* syntax for importing a google font found at Stack Overflow: https://stackoverflow.com/questions/14676613/how-to-import-google-web-font-in-css-file */
+
+@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy');
 h1 {
     /* scaling using height 0 and padding percentage found on CSS-tricks: https://css-tricks.com/aspect-ratio-boxes/*/
     height: 0;
     padding: 10%;
     width: 70%;
     /* scailing font using vw found on CSS-tricks: https://css-tricks.com/books/volume-i/scale-typography-screen-size/ */
-    font-size: 4vw;
-    color: whitesmoke;
+    font-size: 5vw;
+    font-family: 'Luckiest Guy', cursive;
+    color: rgb(255, 242, 242);
+    text-shadow: 0.5vw 0.5vw 0.5vw rgb(51, 2, 2);
     text-align: center;
     background-color: rgb(252, 203, 157);
     margin-left: auto;
@@ -27,6 +32,14 @@ body {
 
 p {
     text-align: center;
+}
+
+ul {
+    list-style-position: inside;
+}
+
+.store {
+    list-style: none;
 }
 
 a {

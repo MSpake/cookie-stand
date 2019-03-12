@@ -6,7 +6,7 @@ var business_hours = [6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
 
 //objects hold the info for the 5 stores
 var pike_store = {
-  location: 'Pike',
+  location: 'Pike Place',
   min_customers: 23,
   max_customers: 65,
   avg_cookies_per_sale: 6.3,
@@ -106,6 +106,7 @@ function add_store_to_sales_list(store) {
   var add_store_li = document.createElement('li');
   //remove all whitespace syntax found on Stack Overflow: https://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text/6623263
   add_store_li.setAttribute('id', store.location.toLowerCase().replace(/\s/g, ''));
+  add_store_li.setAttribute('class', 'store');
   get_parent_element.append(add_store_li);
 
   var store_header = document.createElement('h2');
