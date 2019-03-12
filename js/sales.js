@@ -1,9 +1,5 @@
 'use strict';
 
-//hours the cookie stores are open
-var business_hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
-var stores = [];
-
 //Cookie store constructor
 //takes store location, minimun customers per day, maximum customers per day, and average number of cookies sold per customer
 function Cookie_store(location, min_customers, max_customers, avg_cookies_per_sale) {
@@ -59,7 +55,7 @@ Cookie_store.prototype.render_store_to_sales_list = function() {
 };
 
 
-//populate the header with the business hours
+//populate the header of the table with the business hours
 function header() {
   var table_head = document.getElementById('sales-list-head');
   var place_holder = document.createElement('th');
@@ -72,41 +68,55 @@ function header() {
   }
 }
 
+//populate the footer of the table with the daily totals
 function footer() {
   var table_foot = document.getElementById('sales-list-foot');
-  var place_holder = document.createElement('th');
-  table_foot.appendChild(place_holder);
+  var totals_row = document.createElement('th');
+  totals_row.textContent = 'Totals';
+  table_foot.appendChild(totals_row);
+
+  var total_all_stores = 0;
 
   for (var i = 0; i < business_hours.length; i++) {
     var total = document.createElement('td');
-    total.textContent = 'footer ';
+    var hourly_total = 0;
+    for (var j = 0; j < stores.length; j++) {
+      hourly_total += (stores[j].cookies_per_hour[i]);
+    }
+    total_all_stores += hourly_total;
+    total.textContent = hourly_total;
     table_foot.appendChild(total);
   }
+
+  var total_total = document.createElement('td');
+  total_total.textContent = total_all_stores;
+  table_foot.appendChild(total_total);
 }
 
+//--------------------------------
+
+//hours the cookie stores are open
+var business_hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+
+//list of stores
+var stores = [
+  new Cookie_store('Pike Place', 23, 65, 6.3),
+  new Cookie_store('SeaTac', 3, 24, 1.2),
+  new Cookie_store('Seattle Center', 11, 38, 3.7),
+  new Cookie_store('Capitol Hill', 20, 38, 2.3),
+  new Cookie_store('Alki', 2, 16, 4.6)
+];
+
+//calculate daily sales for each store
+//render store sales to the page
+for (var i = 0; i < stores.length; i++) {
+  stores[i].calculate_sales_per_hour();
+  stores[i].render_store_to_sales_list();
+}
+
+console.log(stores);
+
+//render header (business hours)
+//render footer (hourly sales)
 header();
 footer();
-
-var pike_store = new Cookie_store('Pike Place', 23, 65, 6.3);
-var seatac_store = new Cookie_store('SeaTac', 3, 24, 1.2);
-var seattle_center_store = new Cookie_store('Seattle Center', 11, 38, 3.7);
-var capitol_hill_store = new Cookie_store('Capitol Hill', 20, 38, 2.3);
-var alki_store = new Cookie_store('Alki', 2, 16, 4.6);
-
-pike_store.calculate_sales_per_hour();
-seatac_store.calculate_sales_per_hour();
-seattle_center_store.calculate_sales_per_hour();
-capitol_hill_store.calculate_sales_per_hour();
-alki_store.calculate_sales_per_hour();
-
-pike_store.render_store_to_sales_list();
-seatac_store.render_store_to_sales_list();
-seattle_center_store.render_store_to_sales_list();
-capitol_hill_store.render_store_to_sales_list();
-alki_store.render_store_to_sales_list();
-
-console.log(pike_store);
-console.log(seatac_store);
-console.log(seattle_center_store);
-console.log(capitol_hill_store);
-console.log(alki_store);
