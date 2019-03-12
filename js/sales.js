@@ -1,8 +1,11 @@
 'use strict';
 
-
+//hours the cookie stores are open
 var business_hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+var stores = [];
 
+//Cookie store constructor
+//takes store location, minimun customers per day, maximum customers per day, and average number of cookies sold per customer
 function Cookie_store(location, min_customers, max_customers, avg_cookies_per_sale) {
   this.location = location;
   this.min_customers = min_customers;
@@ -15,7 +18,7 @@ function Cookie_store(location, min_customers, max_customers, avg_cookies_per_sa
   this.id_name = this.location.toLowerCase().replace(/\s/g, '');
 }
 
-//generate random number of customers per hour
+//method to generate random number of customers per hour
 //calculate cookie sales for the hour
 //add cookies sold per hour to the store's cookies_per_hour array
 //update total cookies sold for the day
@@ -31,30 +34,58 @@ Cookie_store.prototype.calculate_sales_per_hour = function() {
   }
 };
 
-//function to render given store to the page
-Cookie_store.prototype.add_store_to_sales_list = function() {
-  ////add tds for each hour of sales
-
+//method to render the store sales to the page
+Cookie_store.prototype.render_store_to_sales_list = function() {
   var get_parent_element = document.getElementById('sales-list-body');
-  var add_store_row = document.createElement('tr');
-  add_store_row.setAttribute('id', this.id_name);
-  add_store_row.setAttribute('class', 'store');
+  var store_row = document.createElement('tr');
+  store_row.setAttribute('id', this.id_name);
+  store_row.setAttribute('class', 'store');
 
   var store_name = document.createElement('th');
   store_name.textContent = this.location;
-
-  add_store_row.appendChild(store_name);
+  store_row.appendChild(store_name);
 
   for (var i = 0; i < this.hours.length; i++) {
-    var add_hourly_sales = document.createElement('td');
-    add_hourly_sales.textContent = this.cookies_per_hour[i];
-    add_store_row.appendChild(add_hourly_sales);
+    var hourly_sales = document.createElement('td');
+    hourly_sales.textContent = this.cookies_per_hour[i];
+    store_row.appendChild(hourly_sales);
   }
 
-  get_parent_element.appendChild(add_store_row);
+  var daily_total = document.createElement('td');
+  daily_total.textContent = this.total_cookies_sold;
+  store_row.appendChild(daily_total);
+
+  get_parent_element.appendChild(store_row);
 };
 
-//TODO: add a function to populate the header with the business hours
+
+//populate the header with the business hours
+function header() {
+  var table_head = document.getElementById('sales-list-head');
+  var place_holder = document.createElement('th');
+  table_head.appendChild(place_holder);
+
+  for (var i = 0; i < business_hours.length; i++) {
+    var hour = document.createElement('th');
+    hour.textContent = business_hours[i];
+    table_head.appendChild(hour);
+  }
+}
+
+function footer() {
+  var table_foot = document.getElementById('sales-list-foot');
+  var place_holder = document.createElement('th');
+  table_foot.appendChild(place_holder);
+
+  for (var i = 0; i < business_hours.length; i++) {
+    var total = document.createElement('td');
+    total.textContent = 'footer ';
+    table_foot.appendChild(total);
+  }
+}
+
+header();
+footer();
 
 var pike_store = new Cookie_store('Pike Place', 23, 65, 6.3);
 var seatac_store = new Cookie_store('SeaTac', 3, 24, 1.2);
@@ -68,11 +99,11 @@ seattle_center_store.calculate_sales_per_hour();
 capitol_hill_store.calculate_sales_per_hour();
 alki_store.calculate_sales_per_hour();
 
-pike_store.add_store_to_sales_list();
-seatac_store.add_store_to_sales_list();
-seattle_center_store.add_store_to_sales_list();
-capitol_hill_store.add_store_to_sales_list();
-alki_store.add_store_to_sales_list();
+pike_store.render_store_to_sales_list();
+seatac_store.render_store_to_sales_list();
+seattle_center_store.render_store_to_sales_list();
+capitol_hill_store.render_store_to_sales_list();
+alki_store.render_store_to_sales_list();
 
 console.log(pike_store);
 console.log(seatac_store);
