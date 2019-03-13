@@ -1,9 +1,8 @@
 'use strict';
 
 //--------------------------------
-
-//Constructors and functions
-
+//Constructors and methods
+//--------------------------------
 
 //Cookie store constructor
 function Cookie_store(location, min_customers, max_customers, avg_cookies_per_sale) {
@@ -59,6 +58,9 @@ Cookie_store.prototype.render_store_to_sales_list = function() {
   get_parent_element.appendChild(store_row);
 };
 
+//-----------------------------
+//Stand alone functions
+//-----------------------------
 
 //header function
 //populates the header of the sales table with the business hours
@@ -79,7 +81,7 @@ function header() {
 function footer() {
   var table_foot = document.getElementById('sales-list-foot');
   var totals_row = document.createElement('th');
-  totals_row.textContent = 'Totals';
+  totals_row.textContent = 'Hourly Totals';
   table_foot.appendChild(totals_row);
 
   var total_all_stores = 0;
@@ -101,8 +103,8 @@ function footer() {
 }
 
 //--------------------------------
-
 //Runtime
+//--------------------------------
 
 //hours the cookie stores are open
 var business_hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
