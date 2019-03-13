@@ -109,14 +109,13 @@ function create_new_store(event) {
 //populates the header of the sales table with the business hours
 function header() {
   var table_head = document.getElementById('sales-list-head');
-  var place_holder = document.createElement('th');
-  table_head.appendChild(place_holder);
 
   for (var i in business_hours) {
     var hour = document.createElement('th');
     hour.textContent = business_hours[i];
     table_head.appendChild(hour);
   }
+
 }
 
 //footer function
@@ -124,9 +123,9 @@ function header() {
 function footer() {
   var table_foot = document.getElementById('sales-list-foot');
   table_foot.innerHTML = '';
-  var totals_row = document.createElement('th');
-  totals_row.textContent = 'Hourly Totals';
-  table_foot.appendChild(totals_row);
+  var total_row = document.createElement('th');
+  total_row.textContent = 'Hourly Totals';
+  table_foot.appendChild(total_row);
 
   var total_all_stores = 0;
 
@@ -182,8 +181,6 @@ form.addEventListener('submit', create_new_store);
 //-------------------------------
 //Notes
 
-//TODO:
-//error correction on HTML
 //TODO: stretch:
 //account for variable business hours
 //add employees table

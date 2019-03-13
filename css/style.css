@@ -34,11 +34,27 @@ table {
     background-color: rgb(252, 203, 157, 0.5);
     width: 70%;
     margin: auto;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+#sales-list-head {
+    background-color: rgb(252, 203, 157);
+}
+
+tr:hover {
+    background-color: rgb(252, 203, 157, 0.8);
+}
+
+tfoot:hover {
+    background-color: rgb(252, 203, 157, 0.8);
 }
 
 td,
 th {
     text-align: center;
+    border: 1px solid black;
+    padding: 5px 10px;
 }
 
 form {
@@ -46,16 +62,21 @@ form {
     width: fit-content;
     margin: 50px auto;
     background-color: rgb(252, 203, 157, 0.5);
+    white-space: nowrap;
+}
+
+fieldset {
+    border: 1px solid black;
 }
 
 legend {
     text-align: right;
-    border: none;
 }
 
 label {
     text-align: right;
     display: block;
+    margin-bottom: 3px;
 }
 
 input:focus {
