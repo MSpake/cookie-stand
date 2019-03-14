@@ -51,6 +51,7 @@ Cookie_store.prototype.render_store_to_sales_list = function() {
 
   //create a new cell contaning the store location and append it to the row
   var store_name = document.createElement('th');
+  store_name.setAttribute('class', 'left-edge');
   store_name.textContent = this.location;
   store_row.appendChild(store_name);
 
@@ -66,6 +67,7 @@ Cookie_store.prototype.render_store_to_sales_list = function() {
   //create a cell that contains the total cookies sold for the day
   //append to the row
   var daily_total = document.createElement('td');
+  daily_total.setAttribute('class', 'right-edge');
   daily_total.textContent = this.total_cookies_sold;
   store_row.appendChild(daily_total);
 
@@ -83,7 +85,9 @@ Cookie_store.prototype.render_store_to_sales_list = function() {
 //add new store to stores array, calculate new store's sales, render new store to page
 //re-render footer with updated totals
 function create_new_store(event) {
+  //prevent page refresh
   event.preventDefault();
+
   //access the user input data
   //assign each of the values for 'location', 'min_customers', 'max_customers', and 'avg_cookies_per_sale' to seperate variables
   var location = event.target.location.value;
@@ -108,8 +112,11 @@ function create_new_store(event) {
 //header function
 //populates the header of the sales table with the business hours
 function header() {
+  //get parent element
   var table_head = document.getElementById('sales-list-head');
 
+  //iterate through business hours array
+  //create cells and append to the header for each hour
   for (var i in business_hours) {
     var hour = document.createElement('th');
     hour.textContent = business_hours[i];
@@ -121,26 +128,40 @@ function header() {
 //footer function
 //populates the footer of the sales table with the daily totals
 function footer() {
+  //get parent element and clear all it's inner HTML
   var table_foot = document.getElementById('sales-list-foot');
   table_foot.innerHTML = '';
+
+  //create a totals row table header element
+  //assign it a class, give it content, append it to the table footer
   var total_row = document.createElement('th');
+  total_row.setAttribute('class', 'left-edge');
   total_row.textContent = 'Hourly Totals';
   table_foot.appendChild(total_row);
 
+  //start the total at 0
   var total_all_stores = 0;
 
+  //for each hour of business
+  //create a td element and sum the hourly sales for each store
   for (var i in business_hours) {
     var total = document.createElement('td');
     var hourly_total = 0;
+    //iterate through each store, adding the number of cookies sold to the hourly total
     for (var j in stores) {
       hourly_total += (stores[j].cookies_per_hour[i]);
     }
-    total_all_stores += hourly_total;
+    //fill in the td element with the hourly total and append to the table footer
     total.textContent = hourly_total;
     table_foot.appendChild(total);
+
+    //add hourly total to the overall total
+    total_all_stores += hourly_total;
   }
 
+  //create and append the cell for the overall total
   var total_total = document.createElement('td');
+  total_total.setAttribute('class', 'right-edge');
   total_total.textContent = total_all_stores;
   table_foot.appendChild(total_total);
 }
@@ -179,7 +200,6 @@ var form = document.getElementById('enter-new-store');
 form.addEventListener('submit', create_new_store);
 
 //-------------------------------
-//Notes
 
 //TODO: stretch:
 //account for variable business hours
