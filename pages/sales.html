@@ -11,16 +11,37 @@
 
 <body>
     <h1>Sales Page</h1>
-    <a href="../index.html">Home</a>
     <table id="sales-list">
         <thead id="sales-list-head">
-            <th>Store Locations</th>
+            <th rowspan="2" id="left-h">Store Locations</th>
             <th colspan="14">Sales Per Hour</th>
-            <th>Daily Location Totals</th>
+            <th rowspan="2" id="right-h">Daily Location Totals</th>
         </thead>
         <tbody id="sales-list-body"></tbody>
         <tfoot id="sales-list-foot"></tfoot>
     </table>
+    <form id="enter-new-store">
+        <fieldset>
+            <legend>Enter New Store Details:</legend>
+            <label>Location: 
+                <input type="text" id="location" class="field" required="required">
+            </label>
+            <!-- form validation syntax found on MDN: https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation -->
+            <label> Minimum Number of Customers:
+                <input type="text" id="min_customers" class="field number"  required="required" pattern="[0-9]+">
+            </label>
+            <label> Maximum Number of Customers:
+                <input type="text" id="max_customers" class="field number" required="required" pattern="[0-9]+"> 
+            </label>
+            <label> Average Number of Cookies Per Sale:
+                <input type="text" id="avg_cookies_per_sale" class="field number" required="required" pattern="[0-9]+">
+            </label>
+            <label>
+                <input type="submit" id="submit">
+            </label>
+        </fieldset>
+    </form>
+    <a href="../index.html">Home</a>
     <script src="../js/sales.js"></script>
 </body>
 
