@@ -3,49 +3,138 @@
 @import url('https://fonts.googleapis.com/css?family=Luckiest+Guy');
 
 /* ---------------------------
-Giant fish logo at top of page
- ------------------------------*/
+Header and nav bar
+------------------------------*/
 
-h1 {
-    /* scaling using height 0 and padding percentage found on CSS-tricks: https://css-tricks.com/aspect-ratio-boxes/*/
-    height: 0;
-    padding: 10%;
-    width: 70%;
-    /* scailing font using vw found on CSS-tricks: https://css-tricks.com/books/volume-i/scale-typography-screen-size/ */
-    font-size: 5vw;
+header {
+    margin: 30px auto 60px auto;
+    width: 960px;
+    height: 200px;
+    /* syntax for gradient foud here: https://www.w3schools.com/css/css3_gradients.asp */
+    background-image: linear-gradient(#f8bc94, #9eebe0);
+    border-radius: 30px 30px 0 0;
+}
+
+header>h1 {
+    font-size: 5em;
     font-family: 'Luckiest Guy', cursive;
     color: rgb(255, 242, 242);
     text-shadow: 0.5vw 0.5vw 0.5vw rgb(51, 2, 2);
     text-align: center;
-    background-color: rgb(252, 203, 157);
-    margin: auto;
+    height: 80px;
+    padding: 75px 0 45px 0;
     background-image: url(../img/salmon.png);
-    background-repeat: no-repeat;
-    background-size: contain;
     background-position: 50%;
-    border-radius: 60%;
-    margin-bottom: 60px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+nav {
+    background-color: #9eebe0;
+    margin: auto;
+    width: 960px;
+    height: 35px;
+    border-radius: 0 0 30px 30px;
+}
+
+nav>ul>li {
+    float: left;
+    text-align: center;
+    width: 285px;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+nav a {
+    color: #374236;
 }
 
 
 /* ---------------------------
-  Main page and general theme
+  General
   ------------------------------*/
 
 body {
-    background-color: rgb(124, 51, 51);
-}
-
-#main-page-catchphrase {
+    background-color: #D27E60;
     text-align: center;
 }
 
-p {
-    text-align: center;
+main {
+    padding-bottom: 30px;
+}
+
+h2,
+figcaption {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 20px 0 30px 0;
+}
+
+ul {
+    height: 350px;
+    width: 960px;
+    margin: auto;
+}
+
+ul>figure {
+    display: inline-block;
+    width: 250px;
+    margin: 10px;
+    position: relative;
+    white-space: nowrap;
+}
+
+ul>figure>img {
+    border-radius: 50%;
+    height: 250px;
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+ul>figure:hover {
+    height: 300px;
+    width: 300px;
+    z-index: 5;
+}
+
+ul>figure>img:hover {
+    height: 300px;
+    width: 300px;
+    box-shadow: 0 0 20px 20px #9eebe0;
+    z-index: 5;
 }
 
 a {
-    color: rgb(230, 175, 124);
+    color: #ffc25e;
+}
+
+main>figure>img {
+    border-radius: 50%;
+}
+
+article {
+    margin-top: 70px;
+    width: 400px;
+    margin: auto;
+}
+
+article>h2 {
+    background-color: #9eebe0CC;
+    /* width: fit-content; */
+    /* margin: auto; */
+    padding: 20px 0;
+    border-radius: 100%;
+}
+
+article>ul {
+    list-style-image: url("../img/frosted-cookie.jpg");
+    list-style-position: inside;
+    text-align: left;
+    width: inherit;
+}
+
+article ul>li {
+    margin-bottom: 7px;
 }
 
 
@@ -54,44 +143,49 @@ Tables
  ------------------------------*/
 
 table {
-    background-color: rgb(252, 203, 157, 0.5);
-    width: 70%;
+    /* syntax for gradient foud here: https://www.w3schools.com/css/css3_gradients.asp */
+    background-image: linear-gradient(#9eebe0, #f8bc94);
+    width: 960px;
     margin: auto;
     border-collapse: collapse;
     white-space: nowrap;
-    border-radius: 10px;
 }
 
 thead {
-    background-color: rgb(252, 203, 157);
+    background-color: #9eebe0;
     border-bottom: 2px solid rgb(92, 35, 35);
 }
 
-tfoot {
-    border-radius: 10px;
-    border-top: 1px solid rgb(92, 35, 35);
+td,
+th {
+    text-align: center;
+    padding: 10px 10px;
 }
 
-.left-edge {
+tfoot {
+    border-top: 1px solid rgb(92, 35, 35);
+    background-color: #f8bc94);
+}
+
+tfoot>th {
     border-right: 1px solid rgb(92, 35, 35);
 }
 
-.right-edge {
+tfoot>td:last-child {
     border-left: 1px solid rgb(92, 35, 35);
 }
 
-tr:nth-child(2n) {
-    background-color: rgb(252, 203, 157, 0.2);
+tr>th {
+    border-right: 1px solid rgb(92, 35, 35);
 }
 
-tr:hover,
-tfoot:hover {
-    background-color: rgb(252, 203, 157, 0.8);
+tr>td:last-child {
+    border-left: 1px solid rgb(92, 35, 35);
 }
 
 
 /* ---------------------------
-New Store Entry Form
+Forms
  ------------------------------*/
 
 form {
@@ -102,10 +196,10 @@ form {
 }
 
 fieldset {
-    /* border: 1px solid black; */
     border: none;
     background-color: rgb(252, 203, 157, 0.5);
     border-radius: 7px;
+    padding: 7px 7px 0 7px;
 }
 
 legend {
@@ -119,14 +213,7 @@ legend {
 label {
     text-align: right;
     display: block;
-    margin-bottom: 3px;
-}
-
-td,
-th {
-    text-align: center;
-    /* border: 1px solid black; */
-    padding: 5px 10px;
+    margin-bottom: 7px;
 }
 
 .number {
