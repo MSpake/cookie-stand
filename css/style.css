@@ -58,9 +58,29 @@ body {
     text-align: center;
 }
 
-h2 {
+h2,
+figcaption {
     font-size: 1.5em;
     font-weight: bold;
+    margin-bottom: 30px;
+}
+
+ul {
+    height: 350px;
+    width: 960px;
+    margin: auto;
+}
+
+ul>figure {
+    width: 300px;
+    margin: 10px;
+    float: left;
+}
+
+ul>figure>img {
+    border-radius: 50%;
+    height: 300px;
+    width: 300px;
 }
 
 a {
