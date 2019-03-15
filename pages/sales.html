@@ -5,43 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/reset.css">
     <link href="../css/style.css" type="text/css" rel="stylesheet">
     <title>Document</title>
 </head>
 
 <body>
-    <h1>Sales Page</h1>
-    <table id="sales-list">
-        <thead id="sales-list-head">
-            <th rowspan="2" id="left-h">Store Locations</th>
-            <th colspan="14">Sales Per Hour</th>
-            <th rowspan="2" id="right-h">Daily Location Totals</th>
-        </thead>
-        <tbody id="sales-list-body"></tbody>
-        <tfoot id="sales-list-foot"></tfoot>
-    </table>
-    <form id="enter-new-store">
-        <fieldset>
-            <legend>Enter New Store Details:</legend>
-            <label>Location: 
+    <header>
+        <h1>Sales Page</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../pages/sales.html">Sales</a></li>
+                <li><a href="../pages/store.html">Merch</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <p>Don't belive these cookies are great?? Check out our epic sales!</p>
+        <table id="sales-list">
+            <thead id="sales-list-head">
+                <th rowspan="2" id="left-h">Store Locations</th>
+                <th colspan="14">Sales Per Hour</th>
+                <th rowspan="2" id="right-h">Daily Location Totals</th>
+            </thead>
+            <tbody id="sales-list-body"></tbody>
+            <tfoot id="sales-list-foot"></tfoot>
+        </table>
+        <form id="enter-new-store">
+            <fieldset>
+                <legend>Enter New Store Details:</legend>
+                <label>Location: 
                 <input type="text" id="location" class="field" required="required">
             </label>
-            <!-- form validation syntax found on MDN: https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation -->
-            <label> Minimum Number of Customers:
+                <!-- form validation syntax found on MDN: https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation -->
+                <label> Minimum Number of Customers:
                 <input type="text" id="min_customers" class="field number"  required="required" pattern="[0-9]+">
             </label>
-            <label> Maximum Number of Customers:
+                <label> Maximum Number of Customers:
                 <input type="text" id="max_customers" class="field number" required="required" pattern="[0-9]+"> 
             </label>
-            <label> Average Number of Cookies Per Sale:
+                <label> Average Number of Cookies Per Sale:
                 <input type="text" id="avg_cookies_per_sale" class="field number" required="required" pattern="[0-9]+">
             </label>
-            <label>
+                <label>
                 <input type="submit" id="submit">
             </label>
-        </fieldset>
-    </form>
-    <a href="../index.html">Home</a>
+            </fieldset>
+        </form>
+        <img src="../img/chinook.jpg" alt="">
+        <a href="../index.html">Home</a>
+    </main>
     <script src="../js/sales.js"></script>
 </body>
 
