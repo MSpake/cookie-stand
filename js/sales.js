@@ -12,6 +12,7 @@ function Cookie_store(location, min_customers, max_customers, avg_cookies_per_sa
   this.avg_cookies_per_sale = avg_cookies_per_sale;
   this.hours = business_hours;
   this.customers_per_hour = [];
+  this.employees_per_hour = [];
   this.cookies_per_hour = [];
   this.total_cookies_sold = 0;
   //remove all whitespace syntax found on Stack Overflow: https://stackoverflow.com/questions/6623231/remove-all-white-spaces-from-text/6623263
@@ -22,6 +23,7 @@ function Cookie_store(location, min_customers, max_customers, avg_cookies_per_sa
 //generates random number of customers per hour, pushes to the store's customers_per_hour array
 //calculates cookie sales per hour, pushes to the store's cookies_per_hour array
 //updates total cookies sold for the day
+//calcualtes total employees needed per hour, pushes to the store's employees_per_hour array
 Cookie_store.prototype.calculate_sales_per_hour = function() {
   //iterate a number of times equal to the number of hours the store is open
   for (var i in this.hours) {
@@ -36,6 +38,11 @@ Cookie_store.prototype.calculate_sales_per_hour = function() {
     var cookies_per_hour = Math.round(customers_per_hour * this.avg_cookies_per_sale);
     this.cookies_per_hour.push(cookies_per_hour);
     this.total_cookies_sold += cookies_per_hour;
+
+    //calculate employees needed for the hour, push to coresponding array
+    var employees = Math.ceil(cookies_per_hour / 20);
+    if (employees < 2) { employees = 2; }
+    this.employees_per_hour.push(employees);
   }
 };
 
@@ -43,15 +50,14 @@ Cookie_store.prototype.calculate_sales_per_hour = function() {
 //renders the store location and hourly sales to the sales table
 Cookie_store.prototype.render_store_to_sales_list = function() {
   //get parent element.
-  //create a new row with a unique id (store location) and a class 'store'
+  //create a new row with a unique id (store location) and a class 'store-sales'
   var get_parent_element = document.getElementById('sales-list-body');
   var store_row = document.createElement('tr');
   store_row.setAttribute('id', this.id_name);
-  store_row.setAttribute('class', 'store');
+  store_row.setAttribute('class', 'store-sales');
 
   //create a new cell contaning the store location and append it to the row
   var store_name = document.createElement('th');
-  store_name.setAttribute('class', 'left-edge');
   store_name.textContent = this.location;
   store_row.appendChild(store_name);
 
@@ -67,11 +73,40 @@ Cookie_store.prototype.render_store_to_sales_list = function() {
   //create a cell that contains the total cookies sold for the day
   //append to the row
   var daily_total = document.createElement('td');
-  daily_total.setAttribute('class', 'right-edge');
   daily_total.textContent = this.total_cookies_sold;
   store_row.appendChild(daily_total);
 
   //append whole row to the parent element (sales list)
+  get_parent_element.appendChild(store_row);
+};
+
+//Cookie strore method render_employees_to_table
+//renders store locations and employee count to sales page
+Cookie_store.prototype.render_employees_to_table = function() {
+  //get parent element.
+  //create a new row with a unique id (store location) and a class 'store-employees'
+  var get_parent_element = document.getElementById('employee-table-body');
+  var store_row = document.createElement('tr');
+  store_row.setAttribute('id', this.id_name);
+  store_row.setAttribute('class', 'store-employees');
+
+  //create a new cell contaning the store location and append it to the row
+  var store_name = document.createElement('th');
+  store_name.textContent = this.location;
+  store_row.appendChild(store_name);
+
+  //create cells for each hour that the business is open
+  //each cell contains the number of employees needed that hour
+  //append cells to the row
+  for (var i in this.hours) {
+    var hourly_employees = document.createElement('td');
+    hourly_employees.textContent = this.employees_per_hour[i];
+    store_row.appendChild(hourly_employees);
+  }
+
+  var place_holder = document.createElement('td');
+  store_row.appendChild(place_holder);
+
   get_parent_element.appendChild(store_row);
 };
 
@@ -101,19 +136,22 @@ function create_new_store(event) {
   stores.push(new_store);
   new_store.calculate_sales_per_hour();
   new_store.render_store_to_sales_list();
+  new_store.render_employees_to_table();
 
   //re-render the footer with updated totals
   footer();
 
   //form field reset syntax found at: https://www.w3schools.com/jsref/met_form_reset.asp
   event.target.reset();
+
+
 }
 
 //header function
 //populates the header of the sales table with the business hours
-function header() {
+function header(table_head_id) {
   //get parent element
-  var table_head = document.getElementById('sales-list-head');
+  var table_head = document.getElementById(table_head_id);
 
   //iterate through business hours array
   //create cells and append to the header for each hour
@@ -135,7 +173,6 @@ function footer() {
   //create a totals row table header element
   //assign it a class, give it content, append it to the table footer
   var total_row = document.createElement('th');
-  total_row.setAttribute('class', 'left-edge');
   total_row.textContent = 'Hourly Totals';
   table_foot.appendChild(total_row);
 
@@ -161,7 +198,6 @@ function footer() {
 
   //create and append the cell for the overall total
   var total_total = document.createElement('td');
-  total_total.setAttribute('class', 'right-edge');
   total_total.textContent = total_all_stores;
   table_foot.appendChild(total_total);
 }
@@ -187,12 +223,15 @@ var stores = [
 for (var i in stores) {
   stores[i].calculate_sales_per_hour();
   stores[i].render_store_to_sales_list();
+  stores[i].render_employees_to_table();
 }
 
 //render header (business hours)
 //render footer (sales totals)
-header();
+header('sales-list-head');
 footer();
+
+header('employee-table-head');
 
 //when a user submits info for a new store, create a new store, calculate it's sales, and render it to the page
 //includes re-rendering the footer with updated totals
@@ -203,4 +242,3 @@ form.addEventListener('submit', create_new_store);
 
 //TODO: stretch:
 //account for variable business hours
-//add employees table
