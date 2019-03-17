@@ -11,14 +11,14 @@ header {
     width: 960px;
     height: 200px;
     /* syntax for gradient foud here: https://www.w3schools.com/css/css3_gradients.asp */
-    background-image: linear-gradient(rgb(88, 88, 88), lightgray);
+    background-image: linear-gradient(rgb(62, 146, 224), rgb(194, 225, 253));
     border-radius: 30px 30px 0 0;
 }
 
 header>h1 {
     font-size: 5em;
     font-family: 'Luckiest Guy', cursive;
-    color: white;
+    color: whitesmoke;
     text-shadow: 0.5vw 0.5vw 0.5vw rgb(51, 2, 2);
     text-align: center;
     height: 80px;
@@ -30,7 +30,7 @@ header>h1 {
 }
 
 nav {
-    background-color: lightgray;
+    background-color: rgb(194, 225, 253);
     margin: auto;
     width: 960px;
     height: 35px;
@@ -59,7 +59,7 @@ nav a {
 }
 
 body {
-    background-color: grey;
+    background-color: rgb(216, 210, 178);
     text-align: center;
 }
 
@@ -91,7 +91,7 @@ ul>figure {
 ul>figure>figcaption {
     padding: 10px;
     border-radius: 50%;
-    background-color: lightgray;
+    background-color: rgb(62, 146, 224);
 }
 
 ul>figure>img {
@@ -110,12 +110,12 @@ ul>figure:hover {
 ul>figure>img:hover {
     height: 300px;
     width: 300px;
-    box-shadow: 0 0 20px 20px lightgray;
+    box-shadow: 0 0 20px 20px rgb(194, 225, 253);
     z-index: 5;
 }
 
 a {
-    color: lightgray;
+    color: rgb(194, 225, 253);
 }
 
 main>figure>img {
@@ -129,13 +129,13 @@ article {
 }
 
 article>h2 {
-    background-color: lightgray;
+    background-color: rgb(62, 146, 224);
     padding: 20px 0;
     border-radius: 100%;
 }
 
 article>ul {
-    list-style-image: url("../img/frosted-cookie-greyscale.jpg");
+    list-style-image: url("../img/frosted-cookie-ocean.jpg");
     list-style-position: inside;
     text-align: left;
     width: inherit;
@@ -152,7 +152,7 @@ Tables
 
 table {
     /* syntax for gradient foud here: https://www.w3schools.com/css/css3_gradients.asp */
-    background-image: linear-gradient(lightgray, rgb(88, 88, 88));
+    background-image: linear-gradient(rgb(194, 225, 253), rgb(62, 146, 224));
     width: 960px;
     margin: 0 auto 40px auto;
     border-collapse: collapse;
@@ -160,9 +160,9 @@ table {
 }
 
 thead {
-    background-color: lightgray;
+    background-color: rgb(194, 225, 253);
     /* color: rgb(170, 170, 170); */
-    border-bottom: 2px solid rgb(92, 35, 35);
+    border-bottom: 2px solid black;
 }
 
 td,
@@ -181,30 +181,30 @@ td {
 }
 
 tfoot {
-    border-top: 1px solid rgb(92, 35, 35);
-    background-color: rgb(88, 88, 88);
+    border-top: 1px solid black;
+    background-color: rgb(62, 146, 224);
 }
 
 tfoot>th {
-    border-right: 1px solid rgb(92, 35, 35);
+    border-right: 1px solid black;
 }
 
 tfoot>td:last-child {
-    border-left: 1px solid rgb(92, 35, 35);
+    border-left: 1px solid black;
 }
 
 tr>th {
-    border-right: 1px solid rgb(92, 35, 35);
+    border-right: 1px solid black;
 }
 
 tr>td:last-child {
-    border-left: 1px solid rgb(92, 35, 35);
+    border-left: 1px solid black;
 }
 
 
 /* ---------------------------
 Forms
- ------------------------------*/
+------------------------------*/
 
 form {
     /* fit content value found on CSS Tricks: https://css-tricks.com/almanac/properties/w/width/ */
@@ -215,7 +215,7 @@ form {
 
 fieldset {
     border: none;
-    background-color: rgb(112, 112, 112);
+    background-color: rgb(62, 146, 224);
     border-radius: 7px;
     padding: 7px 7px 0 7px;
 }
@@ -224,7 +224,7 @@ legend {
     text-align: right;
     padding: 3px 7px;
     /* border: 1px solid black; */
-    background-color: lightgray;
+    background-color: rgb(194, 225, 253);
     border-radius: 5px;
 }
 
@@ -240,8 +240,8 @@ label {
 }
 
 input:focus {
-    box-shadow: 0 0 1px 2px darkgray;
-    background-color: lightgray;
+    box-shadow: 0 0 1px 2px rgb(194, 225, 253);
+    background-color: rgb(194, 225, 253);
 }
 
 select {
@@ -250,4 +250,4 @@ select {
 
 
 /* ---------------------------
- ------------------------------*/
+------------------------------*/
