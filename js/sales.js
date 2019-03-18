@@ -238,6 +238,7 @@ header('employee-table-head');
 var form = document.getElementById('enter-new-store');
 form.addEventListener('submit', create_new_store);
 
+
 //-------------------------------
 
 //TODO: stretch:
