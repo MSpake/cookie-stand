@@ -9,12 +9,15 @@ function set_color_scheme(event) {
 
 //if on the main page, this variable will store a value, otherwise it will be null
 var main_page = document.getElementById('main-page');
+console.log(main_page);
 
 //get and store the HTML element that contains the link to the CSS style sheet
 var pages = document.getElementsByClassName('theme-sheet');
+console.log(pages);
 
 //if on the sales page, this variable will store the HTML element containing the fish picture there
 var fish_pic = document.getElementById('fish');
+console.log(fish_pic);
 
 //if session storage has a selection value stored in it, set the corresponding theme for all pages
 //currently there are three choices: standard salmon, greyscale, and ocean
