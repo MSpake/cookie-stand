@@ -1,4 +1,4 @@
-# Cookie Stand  
+# Salmon Cookies  
   
 ## Synopsis  
   
